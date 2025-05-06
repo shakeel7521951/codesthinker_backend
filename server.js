@@ -5,16 +5,30 @@ import express from "express";
 import mongoose from "mongoose";
 const app = express();
 import cors from "cors";
-
+import cookieParser from "cookie-parser";
 const PORT = process.env.FRONT_URL;
 
-app.use(cors({ origin: process.env.FRONT_URL , credentials:true }));
+import userRoute from "./routes/userRoutes.js";
+
+app.use(cors({ origin: process.env.FRONT_URL, credentials: true }));
 app.use(express.json());
+app.use(cookieParser());
 
-mongoose.connect(process.env.MOGODB_URL)
-.then(()=>{console.log("Database is connected...")})
-.catch(()=>{console.log("Error in connecting database...")})
+app.get("/", (req, res) => {
+  res.send("Backend is running...");
+});
 
-app.listen(PORT,()=>{
-    console.log(`Server is running at PORT ${PORT}`);
-})
+mongoose
+  .connect(process.env.MOGODB_URL)
+  .then(() => {
+    console.log("Database is connected...");
+  })
+  .catch(() => {
+    console.log("Error in connecting database...");
+  });
+
+app.use("/api/v1", userRoute);
+
+app.listen(PORT, () => {
+  console.log(`Server is running at PORT ${PORT}`);
+});
