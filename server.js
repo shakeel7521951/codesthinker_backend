@@ -6,7 +6,7 @@ import mongoose from "mongoose";
 const app = express();
 import cors from "cors";
 import cookieParser from "cookie-parser";
-const PORT = process.env.FRONT_URL;
+const PORT = process.env.PORT || 4000;
 
 import userRoute from "./routes/userRoutes.js";
 
