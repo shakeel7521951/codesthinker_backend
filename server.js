@@ -9,6 +9,7 @@ import cookieParser from "cookie-parser";
 const PORT = process.env.PORT || 4000;
 
 import userRoute from "./routes/userRoutes.js";
+import reviewRoute from "./routes/reviewRoutes.js";
 
 app.use(cors({ origin: process.env.FRONT_URL, credentials: true }));
 app.use(express.json());
@@ -28,6 +29,7 @@ mongoose
   });
 
 app.use("/api/v1", userRoute);
+app.use("/api/v1", reviewRoute);
 
 app.listen(PORT, () => {
   console.log(`Server is running at PORT ${PORT}`);
