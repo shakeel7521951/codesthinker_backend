@@ -24,8 +24,8 @@ mongoose
   .then(() => {
     console.log("Database is connected...");
   })
-  .catch(() => {
-    console.log("Error in connecting database...");
+  .catch((error) => {
+    console.log("Error in connecting database...",error);
   });
 
 app.use("/api/v1", userRoute);
